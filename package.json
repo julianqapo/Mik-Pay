@@ -4,7 +4,7 @@
   "description": "Manages Monthly Internet Payment",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "app.js"
   },
   "author": "Julian M. Qapo",
   "license": "ISC",
