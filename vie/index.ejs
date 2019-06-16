@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+    <h1>Payment of <%=url%></h1>
    <a href="/<%= url %>/adduser">Add User</a>
     <input type="text">
     <% console.log(url) %>
@@ -32,9 +32,11 @@
             <th>dec</th>
        </tr>
        
+       
        <% for (let i=0; i<users.length; i++) { %>
+            
         <tr id="<%= users[i]["name"]%>">
-            <td><%= users[i]["name"]%></td>
+            <td><a href="<%=url%>/<%= users[i]["name"]%>"><%= users[i]["name"]%></a></td>
             <td><%= users[i]["number"]%></td>
             <td><%= users[i]["username"]%></td>
             <td><%= users[i]["type"]%></td>
@@ -43,13 +45,13 @@
              <th class="march"><%= users[i]["march"]%></th>
              <th class="april"><%= users[i]["april"]%></th>
              <th class="may"><%= users[i]["may"]%></th>
-             <th class="june"><%= users[i]["june"]%></th>
-             <th class="july"><%= users[i]["july"]%></th>
-             <th class="augest"><%= users[i]["augest"]%></th>
-             <th class="sep"><%= users[i]["sep"]%></th>
-             <th class="oct"><%= users[i]["oct"]%></th>
-             <th class="nov"><%= users[i]["nov"]%></th>
-             <th class="dec"><%= users[i]["dec"]%></th>
+             <th  class="june"><%= users[i]["june"]%></th>
+             <th  class="july"><%= users[i]["july"]%></th>
+             <th  class="augest"><%= users[i]["augest"]%></th>
+             <th  class="sep"><%= users[i]["sep"]%></th>
+             <th  class="oct"><%= users[i]["oct"]%></th>
+             <th  class="nov"><%= users[i]["nov"]%></th>
+             <th  class="dec"><%= users[i]["dec"]%></th>
 
         </tr>
         <% }%>
@@ -61,25 +63,53 @@
 
 
    </table>
+   <div></div>
+   
 
 </body>
 <script>
-   // const users = require("../users")
-    
-    let table = document.querySelector("table")
-table.addEventListener("click", e=> {
+
+    function formm(){
+        let div = document.querySelector("div")
+    let form = `<form action="/<%= url%>/edituser" method="POST">
+       <input type="text" name="amount" value="${x}" >
+       <input type="text" name="name" value="${user}" >
+       <input type="text" name="month" value="${month}" >
+       <button>submit</button>
+   </form>`
+   div.insertAdjacentHTML("beforeend", form)
+   let btn = document.querySelector("button")
+   btn.dispatchEvent(new MouseEvent("click"))
+    }
+    //const users = require("../users")
     let x;
-    if (e.target.parentNode.hasAttribute){
-        let user = e.target.parentNode.getAttribute("id")
-        let month = e.target.getAttribute("class")
+    let user
+    let month 
+    let table = document.querySelector("table")
+    table.addEventListener("click", e=> {
+    
+    if (e.target.className && e.target.parentNode.hasAttribute("id")){
+         user = e.target.parentNode.getAttribute("id")
+        
+        
+             month = e.target.getAttribute("class")
+            
          x = prompt(`${user}, for the month ${month}:`)
     console.log(x)
     e.target.innerHTML = x
+    // to for and post method for data editing
+    
+    formm()
+    //to here
     }
+    
 
     
     
 })
+
+
+
 </script>
 
 </html>
